@@ -4,6 +4,8 @@ OBJS = main.o FileManager.o AllTasks.o TaskThread.o
 
 all: build
 
+rebuild: clean build
+
 build: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o ./exec.exe
 

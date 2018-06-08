@@ -42,42 +42,6 @@ errorCode_t FileManager::readConfig()
     return retError;
 }
 
-void FileManager::saveToStruct(const std::string &line)
-{
-    singleTaskStructObject.parameters.clear();
-    std::stringstream stream(line);
-    int iter = 0;
-    int n;
-    while (1)
-    {
-        stream >> n;
-        if (!stream)
-        {
-            break;
-        }
-        if (iter == 0) //if iter == 0 it means we are at start of a line, which should be operation ID
-        {
-            singleTaskStructObject.taskID = static_cast<operations_t>(n);
-        }
-        else
-        {
-            singleTaskStructObject.parameters.push_back(n);
-        }
-        ++iter;
-    }
-    singleTaskStructObject.paramCount = --iter;
-    this->tasksDataVector.push_back(singleTaskStructObject);
-}
-
-singleTask FileManager::getSingleTaskStruct()
-{
-    return singleTaskStructObject;
-}
-
-std::vector<singleTask> FileManager::getTasksDataVector()
-{
-    return tasksDataVector;
-}
 int FileManager::getAdditionalThreadsNo()
 {
     return additionalThreads;
