@@ -51,15 +51,15 @@ class AllTasks
     /**
    * @brief Computes sum of given parameters. This function should not return any error, unless completely corrupted arguments are used
    * param[in][out] reference to value which holds result
-   * @return Void
+   * @return Error code specified in Common.h file
    * */
-    void computeSUM(int &retResult); //this function should not return any error, unless completely corrupted arguments are used
+    errorCode_t computeSUM(int &retResult); //this function should not return any error, unless completely corrupted arguments are used
     /**
    * @brief Computes multiplication of given parameters. this function should not return any error, unless completely corrupted arguments are used
    * param[in][out] reference to value which holds result
-   * @return Void
+   * @return Error code specified in Common.h file
    * */
-    void computeMULTIPLICATION(int &retResult); //this function should not return any error, unless completely corrupted arguments are used
+    errorCode_t computeMULTIPLICATION(int &retResult); //this function should not return any error, unless completely corrupted arguments are used
     /**
    * @brief Computes XOR. Two paramaters expected
    * param[in][out] reference to value which holds result

@@ -23,10 +23,10 @@ errorCode_t AllTasks::executeTask(int &retResult)
     switch (taskID)
     {
     case SUM:
-        computeSUM(retResult);
+        retError = computeSUM(retResult);
         break;
     case MULTIPLICATION:
-        computeMULTIPLICATION(retResult);
+        retError = computeMULTIPLICATION(retResult);
         break;
     case XOR:
         retError = computeXOR(retResult);
@@ -65,7 +65,7 @@ errorCode_t AllTasks::executeTask(int &retResult)
     return retError;
 }
 
-void AllTasks::computeSUM(int &retResult)
+errorCode_t AllTasks::computeSUM(int &retResult)
 {
     int sum = 0;
     for (int i = 0; i < paramCount; ++i)
@@ -73,9 +73,10 @@ void AllTasks::computeSUM(int &retResult)
         sum += parameters[i];
     }
     retResult = sum;
+    return NO_ERR;
 }
 
-void AllTasks::computeMULTIPLICATION(int &retResult)
+errorCode_t AllTasks::computeMULTIPLICATION(int &retResult)
 {
     int product = 0;
     if (paramCount > 0)
@@ -87,6 +88,7 @@ void AllTasks::computeMULTIPLICATION(int &retResult)
         }
     }
     retResult = product;
+    return NO_ERR;
 }
 
 errorCode_t AllTasks::computeXOR(int &retResult)
