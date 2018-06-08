@@ -7,15 +7,20 @@
 #include <thread>
 #include <Windows.h>
 #include <mutex>
+#include <future>
+#include <chrono>
+
+std::promise<bool> p;
 
 void doTheTask(const std::string &line)
 {
     TaskThread taskToCalc(line);
-    Sleep(3000);
+    p.set_value(true);
 }
 
 int main()
 {
+    using namespace std::literals::chrono_literals;
     LARGE_INTEGER start, end;              // flags -start and end of program
     QueryPerformanceCounter(&start);       //time measurment
     LARGE_INTEGER frequency;               //time measurment
@@ -34,6 +39,8 @@ int main()
     std::string line;
     std::thread thr[threadNo];
     bool hasTaskStarted;
+    auto future = p.get_future();
+    auto status = future.wait_for(0ms);
 
     while (getline(std::cin, line))
     {
@@ -43,11 +50,20 @@ int main()
             for (int i = 0; i < threadNo; ++i)
             {
                 thr[i] = std::thread(&doTheTask, line);
-                if (thr[i].joinable())
+                if (status == std::future_status::ready)
                 {
-                    thr[i].join();
-                    hasTaskStarted = false;
-                    break;
+                    std::cout << "Thread finished" << std::endl;
+                    if (thr[i].joinable())
+                    {
+                        thr[i].join();
+                        thr[i] = NULL;
+                        hasTaskStarted = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    std::cout << "Thread still running" << std::endl;
                 }
             }
         }
