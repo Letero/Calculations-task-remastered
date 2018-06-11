@@ -301,6 +301,7 @@ errorCode_t AllTasks::computeHIGHEST_PRIME_NUMBER_LT_PARAM(int &retResult)
 {
     errorCode_t retError = NO_ERR;
     checkParam(paramCount, 1, retError);
+
     if (NO_ERR == retError)
     {
         if (parameters[0] <= 2)

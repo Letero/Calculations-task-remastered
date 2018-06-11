@@ -19,11 +19,11 @@ void signal_handler(int signal_num)
 
 void doTheTask(const std::string &line)
 {
-    ++threadsCounter;
+    ++threadsCounter; //amount of threads working
     ManageTask taskToCalc(line);
     std::lock_guard<std::mutex> guard(check_mutex);
     taskToCalc.printResults();
-    --threadsCounter;
+    --threadsCounter; //once thread is done, decrease counter so another can start
 }
 
 int main()
@@ -50,13 +50,14 @@ int main()
     while (getline(std::cin, line))
     {
         bool flag = true;
-        while (flag)
+        while (flag) // loop until thread is free to take the job
         {
-            if (threadsCounter < threadNo)
+            if (threadsCounter < threadNo) //thread no is max number of threads running at once. If there is less running threads than this number -
+            //start another, otherwise wait until one of them finishes its job
             {
-                thr = std::thread(&doTheTask, line);
-                thr.detach();
-                flag = false;
+                thr = std::thread(&doTheTask, line); //start thread
+                thr.detach();                        //detach thread so it will work independly of main thread
+                flag = false;                        //thread started so stop waiting for free one, break loop
             }
         }
         if (true == signalFlag) //CTRL+C used, stop reading input
