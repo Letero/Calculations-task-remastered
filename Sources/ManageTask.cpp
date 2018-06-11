@@ -48,7 +48,6 @@ void ManageTask::calculateSingleTask()
     }
     QueryPerformanceCounter(&end_fun);
     singleTaskStructObj.timeMS = static_cast<double>(end_fun.QuadPart - start_fun.QuadPart) / (frequency.QuadPart / 1000.0); // in ms
-    printResults();
 }
 
 void ManageTask::printResults()

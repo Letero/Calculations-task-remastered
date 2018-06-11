@@ -13,6 +13,10 @@ class ManageTask
 public:
   explicit ManageTask(const std::string &newLine);
   ~ManageTask();
+  /**
+   * @brief Print results after calculating task
+   * */
+  void printResults();
 
 private:
   /**
@@ -34,10 +38,6 @@ private:
      * @return Void 
      * */
   void calculateSingleTask();
-  /**
-   * @brief Print results after calculating task
-   * */
-  void printResults();
 };
 
 #endif //TASKTHREAD_H

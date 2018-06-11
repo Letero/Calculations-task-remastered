@@ -21,6 +21,7 @@ void doTheTask(const std::string &line)
     ++threadsCounter;
     ManageTask taskToCalc(line);
     std::lock_guard<std::mutex> guard(check_mutex);
+    taskToCalc.printResults();
     --threadsCounter;
 }
 

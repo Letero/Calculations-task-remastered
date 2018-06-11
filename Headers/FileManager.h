@@ -9,40 +9,40 @@
 
 class FileManager
 {
-  public:
-    /**
+public:
+  /**
   * @brief Overloaded constructor
   */
-    FileManager();
-    /**
+  FileManager();
+  /**
    * @brief Read config file, default path defined in Common.h file
    * @param[out] number of threads
    * @return Error code specified in Common.h file
    * */
-    errorCode_t readConfig();
-    /**
+  errorCode_t readConfig();
+  /**
      * @brief Simple getter
      * @return number of additional threads 
      * */
-    int getAdditionalThreadsNo();
-    /**
+  int getAdditionalThreadsNo();
+  /**
    * @brief Deconstructor
    * */
-    ~FileManager();
+  ~FileManager();
 
-  private:
-    /**
+private:
+  /**
    * @brief Check this macro in Common.h file 
    * */
-    DISABLE_UNUSED_CONSTUCTORS(FileManager);
-    /**
+  DISABLE_UNUSED_CONSTUCTORS(FileManager);
+  /**
    * @brief amount of additional threads from config.txt file
    * */
-    int additionalThreads;
-    /**
+  int additionalThreads;
+  /**
    * @brief Variable storing config file name
    * */
-    std::string configFile;
+  std::string configFile;
 };
 
 #endif //FILEMANAGER_H
