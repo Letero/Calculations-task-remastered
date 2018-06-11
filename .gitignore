@@ -1,5 +1,9 @@
+# Additional files
+Doxyfile
+
 # Directories
 ./Output
+
 # Prerequisites
 *.d
 
