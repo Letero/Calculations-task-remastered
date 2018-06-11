@@ -13,6 +13,7 @@ errorCode_t FileManager::readConfig()
     std::string line;
     std::ifstream newFile(configFile);
     int temp = 0; //temporary value to store amount of threads extracted from file
+
     if (newFile.is_open())
     {
         wasFileOpenedFlag = true;
@@ -39,6 +40,7 @@ errorCode_t FileManager::readConfig()
     {
         additionalThreads = temp;
     }
+    
     return retError;
 }
 

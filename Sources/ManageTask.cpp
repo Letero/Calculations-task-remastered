@@ -11,6 +11,7 @@ void ManageTask::saveToStruct()
     std::stringstream stream(line);
     int iter = 0;
     int n;
+
     while (1)
     {
         stream >> n;
@@ -38,6 +39,7 @@ void ManageTask::calculateSingleTask()
     QueryPerformanceFrequency(&frequency);
     QueryPerformanceCounter(&start_fun);
     AllTasks newTask(singleTaskStructObj);
+
     if (NO_ERR == newTask.executeTask(singleTaskStructObj.result)) //execute every task line by line, save result to singleTask struct
     {
         singleTaskStructObj.errorFlag = true;

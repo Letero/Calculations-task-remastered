@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++11 -g -Wall
+CFLAGS = -std=c++11 -g -Wall -pedantic -Werror
 OBJS = main.o FileManager.o AllTasks.o ManageTask.o
 
 all: build

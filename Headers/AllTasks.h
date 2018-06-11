@@ -38,7 +38,7 @@ private:
   /**
    * @brief number of parameters 
    * */
-  int paramCount;
+  unsigned int paramCount;
   /**
    * @brief task ID extracted from single line of txt file
    * */
