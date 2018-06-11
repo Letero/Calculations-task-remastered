@@ -109,11 +109,10 @@ errorCode_t AllTasks::computeXOR(int &retResult)
         {
             retError = INVALID_PARAM;
         }
-    }
-
-    if (NO_ERR == retError)
-    {
-        retResult = static_cast<int>(parameters[0] ^ parameters[1]);
+        else
+        {
+            retResult = static_cast<int>(parameters[0] ^ parameters[1]);
+        }
     }
 
     return retError;
