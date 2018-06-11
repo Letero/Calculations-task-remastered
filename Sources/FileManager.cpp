@@ -2,7 +2,7 @@
 
 FileManager::~FileManager() {}
 
-FileManager::FileManager() : additionalThreads(0), configFile(CONFIG_FILE_PATH)
+FileManager::FileManager(const std::string &configFilePath) : additionalThreads(0), configFile(configFilePath)
 {
 }
 

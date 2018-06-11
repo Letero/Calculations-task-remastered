@@ -20,7 +20,7 @@ public:
    * param[in][out] reference to value which holds result
    * return Error code specified in Common.h file
   * */
-  errorCode_t executeTask(int &retResult); // function executes tasks, used by extractTask(const string&) function
+  errorCode_t executeTask(int &retResult); //function executes tasks, used by extractTask(const string&) function
 
 private:
   /**

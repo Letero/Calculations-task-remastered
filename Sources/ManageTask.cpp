@@ -34,7 +34,7 @@ void ManageTask::saveToStruct()
 
 void ManageTask::calculateSingleTask()
 {
-    LARGE_INTEGER start_fun, end_fun, frequency; // flags - start and end of function
+    LARGE_INTEGER start_fun, end_fun, frequency; //flags - start and end of function
     QueryPerformanceFrequency(&frequency);
     QueryPerformanceCounter(&start_fun);
     AllTasks newTask(singleTaskStructObj);
@@ -47,7 +47,7 @@ void ManageTask::calculateSingleTask()
         singleTaskStructObj.errorFlag = false;
     }
     QueryPerformanceCounter(&end_fun);
-    singleTaskStructObj.timeMS = static_cast<double>(end_fun.QuadPart - start_fun.QuadPart) / (frequency.QuadPart / 1000.0); // in ms
+    singleTaskStructObj.timeMS = static_cast<double>(end_fun.QuadPart - start_fun.QuadPart) / (frequency.QuadPart / 1000.0); //in ms
 }
 
 void ManageTask::printResults()

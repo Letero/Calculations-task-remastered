@@ -13,7 +13,7 @@ public:
   /**
   * @brief Overloaded constructor
   */
-  FileManager();
+  explicit FileManager(const std::string &configFilePath);
   /**
    * @brief Read config file, default path defined in Common.h file
    * @param[out] number of threads
