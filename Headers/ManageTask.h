@@ -13,14 +13,12 @@ class ManageTask
 public:
   explicit ManageTask(const std::string &newLine);
   ~ManageTask();
-  void init();
-  void printResults();
 
-  //private:
+private:
   /**
    * @brief Variable storing object of singleTask struct
    * */
-  singleTask singleTaskStructObject;
+  singleTask singleTaskStructObj;
   /**
      * @brief String with data to operate on
      * */
@@ -28,13 +26,18 @@ public:
   /**
    * @brief Helper function, extracts data from lines and saves to singleTask struct object
    * @param[in] line to operate on
-   * return Void
+   * @return Void
    * */
   void saveToStruct();
   /**
-     * @brief 
+     * @brief Calculate given task and save results
+     * @return Void 
      * */
   void calculateSingleTask();
+  /**
+   * @brief Print results after calculating task
+   * */
+  void printResults();
 };
 
 #endif //TASKTHREAD_H

@@ -45,10 +45,9 @@ int main()
 
     std::string line;
     std::thread thr;
-    bool flag;
     while (getline(std::cin, line))
     {
-        flag = true;
+        bool flag = true;
         while (flag)
         {
             if (threadsCounter < threadNo)

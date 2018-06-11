@@ -2,7 +2,7 @@
 
 FileManager::~FileManager() {}
 
-FileManager::FileManager() : configFile(CONFIG_FILE_PATH)
+FileManager::FileManager() : additionalThreads(0), configFile(CONFIG_FILE_PATH)
 {
 }
 

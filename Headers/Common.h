@@ -51,16 +51,34 @@ enum errorCode_t
 };
 
 /**
- * struct holding all data which are used to compute and print task results
+ * @brief struct holding all data which are used to compute and print task results
  * */
-struct singleTask // struct containing everything that is needed by task, and its result after computing
+struct singleTask
 {
-    operations_t taskID;
-    std::vector<int> parameters;
-    int paramCount;
-    int result;
+    /**
+     * @brief time in miliseconds
+     * */
     double timeMS;
+    /**
+    * @brief amount of parameters in given line
+    * */
+    int paramCount;
+    /**
+    * @brief save result to this field
+    * */
+    int result;
+    /**
+    * @brief parameters of task, which it operates on
+    * */
+    std::vector<int> parameters;
+    /**
+    * @brief flag to check if error in given task has occured
+    * */
     bool errorFlag;
+    /**
+    * @brief ID of the task, check Common.h for specifics
+    * */
+    operations_t taskID;
 };
 
 #endif //COMMON_H
