@@ -1,12 +1,12 @@
-#include "../Headers/TaskThread.h"
+#include "../Headers/ManageTask.h"
 
-TaskThread::~TaskThread() {}
-TaskThread::TaskThread(const std::string &newLine) : line(newLine)
+ManageTask::~ManageTask() {}
+ManageTask::ManageTask(const std::string &newLine) : line(newLine)
 {
     saveToStruct();
 }
 
-void TaskThread::saveToStruct()
+void ManageTask::saveToStruct()
 {
     std::stringstream stream(line);
     int iter = 0;
@@ -32,7 +32,7 @@ void TaskThread::saveToStruct()
     calculateSingleTask();
 }
 
-void TaskThread::calculateSingleTask()
+void ManageTask::calculateSingleTask()
 {
     LARGE_INTEGER start_fun, end_fun, frequency; // flags - start and end of function
     QueryPerformanceFrequency(&frequency);
@@ -51,11 +51,11 @@ void TaskThread::calculateSingleTask()
     printResults();
 }
 
-void TaskThread::printResults()
+void ManageTask::printResults()
 {
     if (singleTaskStructObject.errorFlag == false)
     {
-        std::cout << line << ": ERROR ==> " << singleTaskStructObject.timeMS << std::endl;
+        std::cout << line << ": ERROR_INPUT_DATA ==> " << singleTaskStructObject.timeMS << std::endl;
     }
     else
     {

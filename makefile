@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -std=c++11 -g -Wall
-OBJS = main.o FileManager.o AllTasks.o TaskThread.o
+OBJS = main.o FileManager.o AllTasks.o ManageTask.o
 
 all: build
 
@@ -15,8 +15,8 @@ main.o:
 FileManager.o:
 	$(CC) $(CFLAGS) ./Sources/FileManager.cpp -c
 
-TaskThread.o:
-	$(CC) $(CFLAGS) ./Sources/TaskThread.cpp -c 
+ManageTask.o:
+	$(CC) $(CFLAGS) ./Sources/ManageTask.cpp -c 
 
 AllTasks.o:
 	$(CC) $(CFLAGS) ./Sources/AllTasks.cpp -c

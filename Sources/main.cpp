@@ -1,21 +1,33 @@
 #include "../Headers/Common.h"
 #include "../Headers/FileManager.h"
-#include "../Headers/TaskThread.h"
+#include "../Headers/ManageTask.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <thread>
 #include <Windows.h>
 #include <mutex>
+std::mutex check_mutex;
+int threadsCounter = 0;
+bool signalFlag = false;
+
+void signal_handler(int signal_num)
+{
+    signalFlag = true;
+}
 
 void doTheTask(const std::string &line)
 {
-    TaskThread taskToCalc(line);
-    Sleep(3000);
+    ++threadsCounter;
+    ManageTask taskToCalc(line);
+    std::lock_guard<std::mutex> guard(check_mutex);
+    --threadsCounter;
 }
 
 int main()
 {
+    signal(SIGINT, signal_handler);
+
     LARGE_INTEGER start, end;              // flags -start and end of program
     QueryPerformanceCounter(&start);       //time measurment
     LARGE_INTEGER frequency;               //time measurment
@@ -32,30 +44,32 @@ int main()
     int threadNo = 1 + fmObject.getAdditionalThreadsNo(); // minimum one thread for calculations + additional from config file
 
     std::string line;
-    std::thread thr[threadNo];
-    bool hasTaskStarted;
-
+    std::thread thr;
+    bool flag;
     while (getline(std::cin, line))
     {
-        hasTaskStarted = true;
-        while (hasTaskStarted)
+        flag = true;
+        while (flag)
         {
-            for (int i = 0; i < threadNo; ++i)
+            if (threadsCounter < threadNo)
             {
-                thr[i] = std::thread(&doTheTask, line);
-                if (thr[i].joinable())
-                {
-                    thr[i].join();
-                    hasTaskStarted = false;
-                    break;
-                }
+                thr = std::thread(&doTheTask, line);
+                thr.detach();
+                flag = false;
             }
         }
+        if (true == signalFlag) // CTRL+C used, stop reading input
+        {
+            break;
+        }
+    }
+    while (threadsCounter) // wait for all threads to finish
+    {
     }
 
     QueryPerformanceCounter(&end);
     interval = static_cast<double>(end.QuadPart - start.QuadPart) / (frequency.QuadPart / 1000.0); // result in ms
     std::cout << "\nTotal time: " << interval << "ms" << std::endl;
 
-    return 0;
+    exit(0);
 }

@@ -8,33 +8,33 @@
 #include <iostream>
 #include <Windows.h> //windows library, QueryPerformanceCounter used from this lib
 
-class TaskThread
+class ManageTask
 {
-  public:
-    explicit TaskThread(const std::string &newLine);
-    ~TaskThread();
-    void init();
-    void printResults();
+public:
+  explicit ManageTask(const std::string &newLine);
+  ~ManageTask();
+  void init();
+  void printResults();
 
-    //private:
-    /**
+  //private:
+  /**
    * @brief Variable storing object of singleTask struct
    * */
-    singleTask singleTaskStructObject;
-    /**
+  singleTask singleTaskStructObject;
+  /**
      * @brief String with data to operate on
      * */
-    std::string line;
-    /**
+  std::string line;
+  /**
    * @brief Helper function, extracts data from lines and saves to singleTask struct object
    * @param[in] line to operate on
    * return Void
    * */
-    void saveToStruct();
-    /**
+  void saveToStruct();
+  /**
      * @brief 
      * */
-    void calculateSingleTask();
+  void calculateSingleTask();
 };
 
 #endif //TASKTHREAD_H
