@@ -1,5 +1,9 @@
 # Additional files
 Doxyfile
+out.txt
+tasks.txt
+./Configuration/config.txt
+
 
 # Directories
 ./Output
