@@ -22,7 +22,6 @@ void doTheTask(const std::string &line)
 
 int main()
 {
-
     LARGE_INTEGER start, end;              //flags - start and end of program
     QueryPerformanceCounter(&start);       //time measurment
     LARGE_INTEGER frequency;               //time measurment
@@ -40,7 +39,7 @@ int main()
 
     std::string line;
     std::thread thr;
-    std::cout << "Press 'q' and then Enter to stop user input" << std::endl;
+    std::cout << "Press 'q' and then 'Enter' to stop user input" << std::endl;
     while (getline(std::cin, line))
     {
         bool flag = true;
@@ -64,6 +63,7 @@ int main()
     while (threadsCounter) //wait for all threads to finish
     {
     }
+    Sleep(1); // sleep for 1 ms to make sure everything will be printed. Without it some prints could be ommited
 
     QueryPerformanceCounter(&end);
     interval = static_cast<double>(end.QuadPart - start.QuadPart) / (frequency.QuadPart / 1000.0); //result in ms
