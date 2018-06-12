@@ -74,7 +74,7 @@ struct singleTask
     /**
     * @brief flag to check if error in given task has occured
     * */
-    bool errorFlag;
+    errorCode_t errorFlag;
     /**
     * @brief ID of the task, check Common.h for specifics
     * */

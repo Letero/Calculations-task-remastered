@@ -10,12 +10,6 @@
 
 std::mutex check_mutex;
 int threadsCounter = 0;
-bool signalFlag = false;
-
-void signal_handler(int signal_num)
-{
-    signalFlag = true;
-}
 
 void doTheTask(const std::string &line)
 {
@@ -28,7 +22,6 @@ void doTheTask(const std::string &line)
 
 int main()
 {
-    signal(SIGINT, signal_handler);
 
     LARGE_INTEGER start, end;              //flags - start and end of program
     QueryPerformanceCounter(&start);       //time measurment
@@ -47,6 +40,7 @@ int main()
 
     std::string line;
     std::thread thr;
+    std::cout << "Press 'q' and then Enter to stop user input" << std::endl;
     while (getline(std::cin, line))
     {
         bool flag = true;
@@ -62,7 +56,7 @@ int main()
             }
         } while (flag);
 
-        if (true == signalFlag) //CTRL+C used, stop reading input
+        if (line == "q")
         {
             break;
         }

@@ -38,6 +38,12 @@ private:
      * @return Void 
      * */
   void calculateSingleTask();
+  /**
+   * @brief function to help with printing error messages
+   * @param[in] errorCode
+   * @return string to print
+   * */
+  std::string printErrorHelper(errorCode_t errCode);
 };
 
 #endif //TASKTHREAD_H

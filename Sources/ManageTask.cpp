@@ -40,26 +40,46 @@ void ManageTask::calculateSingleTask()
     QueryPerformanceCounter(&start_fun);
     AllTasks newTask(singleTaskStructObj);
 
-    if (NO_ERR == newTask.executeTask(singleTaskStructObj.result)) //execute every task line by line, save result to singleTask struct
-    {
-        singleTaskStructObj.errorFlag = true;
-    }
-    else
-    {
-        singleTaskStructObj.errorFlag = false;
-    }
+    singleTaskStructObj.errorFlag = newTask.executeTask(singleTaskStructObj.result);
+
     QueryPerformanceCounter(&end_fun);
     singleTaskStructObj.timeMS = static_cast<double>(end_fun.QuadPart - start_fun.QuadPart) / (frequency.QuadPart / 1000.0); //in ms
 }
 
 void ManageTask::printResults()
 {
-    if (singleTaskStructObj.errorFlag == false)
+    if (NO_ERR != singleTaskStructObj.errorFlag)
     {
-        std::cout << line << ": ERROR_INPUT_DATA ==> " << singleTaskStructObj.timeMS << std::endl;
+        std::cout << line << "==>" << printErrorHelper(singleTaskStructObj.errorFlag) << "==>" << singleTaskStructObj.timeMS << std::endl;
     }
     else
     {
-        std::cout << line << " ==>" << singleTaskStructObj.result << " ==> " << singleTaskStructObj.timeMS << std::endl;
+        std::cout << line << "==>" << singleTaskStructObj.result << "==>" << singleTaskStructObj.timeMS << std::endl;
     }
+}
+
+std::string ManageTask::printErrorHelper(errorCode_t errCode)
+{
+    std::string errorMSG;
+    switch (errCode)
+    {
+    case NO_ERR:
+        break;
+    case INVALID_PARAM:
+        errorMSG = "Error! Invalid Parameter(s)!";
+        break;
+    case INVALID_TASK_ID:
+        errorMSG = "Error! Invalid Task ID!";
+        break;
+    case WRONG_AMOUNT_PARAM:
+        errorMSG = "Error! Wrong amount of parameters!";
+        break;
+    case FILE_READ_ERR:
+        break;
+    case FILE_SAVE_ERR:
+        break;
+    case CONFIG_FILE_READ_ERR:
+        break;
+    }
+    return errorMSG;
 }
