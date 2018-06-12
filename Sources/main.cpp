@@ -50,8 +50,9 @@ int main()
     while (getline(std::cin, line))
     {
         bool flag = true;
-        while (flag) // loop until thread is free to take the job
+        do // loop until thread is free to take the job
         {
+            std::lock_guard<std::mutex> guard(check_mutex);
             if (threadsCounter < threadNo) //thread no is max number of threads running at once. If there is less running threads than this number -
             //start another, otherwise wait until one of them finishes its job
             {
@@ -59,7 +60,8 @@ int main()
                 thr.detach();                        //detach thread so it will work independly of main thread
                 flag = false;                        //thread started so stop waiting for free one, break loop
             }
-        }
+        } while (flag);
+
         if (true == signalFlag) //CTRL+C used, stop reading input
         {
             break;
